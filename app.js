@@ -13,6 +13,8 @@ const PORT = 8000;
 const databaseRead = fs.readFileSync(databasePath, "utf-8");
 const database = JSON.parse(databaseRead);
 
+const userDatabase = {}
+
 app.use(express.json())
 
 // Routes
@@ -21,7 +23,9 @@ app.get("/todos", (req, res) => {
 });
 
 app.post("/todos", (req, res) => {
-  const data = [...database, req.body];
+  const data = {
+    data:  [...database.data, req.body]
+    };
 
   fs.writeFileSync(databasePath, JSON.stringify(data));
 
